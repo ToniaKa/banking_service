@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet id="create_banking_service_schema" author="tonya">
+        <sql>
+            CREATE SCHEMA IF NOT EXISTS banking_service;
+        </sql>
+    </changeSet>
+
+    <changeSet id="create_user_id_seq" author="tonya">
+        <createSequence sequenceName="user_id_seq" incrementBy="1" schemaName="banking_service"/>
+    </changeSet>
+
+    <changeSet id="create_user_table" author="tonya">
+        <createTable tableName="user" schemaName="banking_service">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(300)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="surname" type="varchar(300)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="dateOfBirth" type="date">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create_phone_id_seq" author="tonya">
+        <createSequence sequenceName="phone_id_seq" incrementBy="1" schemaName="banking_service"/>
+    </changeSet>
+
+    <changeSet id="create_phone_table" author="tonya">
+        <createTable tableName="phone" schemaName="banking_service">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="phone" type="varchar(15)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="phone" baseColumnNames="user_id" constraintName="phone_user_id_fk"
+                                 referencedTableName="user"
+                                 referencedColumnNames="id" baseTableSchemaName="banking_service"
+                                 referencedTableSchemaName="banking_service"/>
+    </changeSet>
+
+    <changeSet id="create_email_id_seq" author="tonya">
+        <createSequence sequenceName="email_id_seq" incrementBy="1" schemaName="banking_service"/>
+    </changeSet>
+
+    <changeSet id="create_email_table" author="tonya">
+        <createTable tableName="email" schemaName="banking_service">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="varchar(320)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="email" baseColumnNames="user_id" constraintName="email_user_id_fk"
+                                 referencedTableName="user"
+                                 referencedColumnNames="id" baseTableSchemaName="banking_service"
+                                 referencedTableSchemaName="banking_service"/>
+    </changeSet>
+
+
+    <changeSet id="create_account_seq" author="tonya">
+        <createSequence sequenceName="account_id_seq" incrementBy="1" schemaName="banking_service"/>
+    </changeSet>
+
+    <changeSet id="create_account_table" author="tonya">
+        <createTable tableName="account" schemaName="banking_service">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="balance" type="numeric">
+                <constraints nullable="false"/>
+            </column>
+            <column name="comment" type="text">
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="account" baseColumnNames="user_id" constraintName="account_user_id_fk"
+                                 referencedTableName="user"
+                                 referencedColumnNames="id" baseTableSchemaName="banking_service"
+                                 referencedTableSchemaName="banking_service"/>
+    </changeSet>
+</databaseChangeLog>
