@@ -15,7 +15,7 @@ public class Phone {
     @JoinColumn(name = "user_id")
     private User user;
     @Column(name = "phone")
-    private String phone;
+    private String phone; // переименуй колонку в number например.
 
     public Integer getId() {
         return id;

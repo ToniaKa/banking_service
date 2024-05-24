@@ -31,6 +31,8 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Email> emails;
 
+    // здесь еще нужно поле типа Account
+
     public Integer getId() {
         return id;
     }
