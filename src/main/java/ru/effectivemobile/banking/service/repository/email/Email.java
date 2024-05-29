@@ -6,6 +6,7 @@ import ru.effectivemobile.banking.service.repository.user.User;
 @Entity
 @Table(name = "email", schema = "banking_service")
 public class Email {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "email_id_gen")
     @SequenceGenerator(name = "email_id_gen", sequenceName = "email_id_seq", schema = "banking_service", allocationSize = 1)

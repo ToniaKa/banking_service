@@ -6,6 +6,7 @@ import ru.effectivemobile.banking.service.repository.user.User;
 @Entity
 @Table(name = "phone", schema = "banking_service")
 public class Phone {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "phone_id_gen")
     @SequenceGenerator(name = "phone_id_gen", sequenceName = "phone_id_seq", schema = "banking_service", allocationSize = 1)
@@ -15,7 +16,7 @@ public class Phone {
     @JoinColumn(name = "user_id")
     private User user;
     @Column(name = "phone")
-    private String phone; // переименуй колонку в number например.
+    private String number; // переименуй колонку в number например.
 
     public Integer getId() {
         return id;
@@ -33,11 +34,11 @@ public class Phone {
         this.user = user;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getNumber() {
+        return number;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setNumber(String number) {
+        this.number = number;
     }
 }

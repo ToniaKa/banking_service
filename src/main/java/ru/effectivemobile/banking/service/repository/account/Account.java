@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "account", schema = "banking_service")
 public class Account {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "account_id_gen")
     @SequenceGenerator(name = "account_id_gen", sequenceName = "account_id_seq", schema = "banking_service", allocationSize = 1)

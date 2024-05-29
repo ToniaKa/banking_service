@@ -1,5 +1,6 @@
 package ru.effectivemobile.banking.service.repository.user;
 import jakarta.persistence.*;
+import ru.effectivemobile.banking.service.repository.account.Account;
 import ru.effectivemobile.banking.service.repository.email.Email;
 import ru.effectivemobile.banking.service.repository.phone.Phone;
 
@@ -10,6 +11,7 @@ import java.util.List;
 @Entity
 @Table(name = "user", schema = "banking_service")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_id_gen")
     @SequenceGenerator(name = "user_id_gen", sequenceName = "user_id_seq", schema = "banking_service", allocationSize = 1)
@@ -30,8 +32,16 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Email> emails;
+    @OneToOne(mappedBy = "user",cascade = CascadeType.ALL)// здесь еще нужно поле типа Account
+    private Account account;
 
-    // здесь еще нужно поле типа Account
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
 
     public Integer getId() {
         return id;
